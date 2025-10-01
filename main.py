@@ -1,16 +1,13 @@
 """
-### Шаги для выполнения:
+Шаги для выполнения:
 1. **Определение базового класса `BankAccount`:**
     - Атрибуты: **`owner`** (владелец счета, строка), **`__balance`** (баланс счета, изначально 0, приватный).
     - Методы:
-        - Конструктор **`__init__(self, owner, balance=0)`**
-        - **`deposit(self, amount)`**: добавляет сумму к балансу, если сумма положительная, иначе выбрасывает **`ValueError`**
-        - **`withdraw(self, amount)`**: снимает сумму с баланса, если на счету достаточно средств, иначе выбрасывает **`ValueError`**
-        - **`get_balance(self)`**: возвращает текущий баланс.
+        - Конструктор **`__init__(self, owner, balance=0)`
+        - `deposit(self, amount)`: добавляет сумму к балансу, если сумма положительная, иначе выбрасывает`ValueError`
+        - `withdraw(self, amount)`: снимает сумму с баланса, если на счету достаточно средств, иначе выбрасывает`ValueError`
+        - `get_balance(self)`**: возвращает текущий баланс.
 """
-import pytest as pytest
-
-
 class BankAccount:
     def __init__(self, owner, balance=0):
         self.owner = owner
@@ -30,14 +27,11 @@ class BankAccount:
         return self.__balance
     def get_balance(self):
         return self.__balance
-
 """
  2. **Создание класса `SavingsAccount` (наследуется от `BankAccount`):**
     - Дополнительный атрибут: **`interest_rate`** (процентная ставка 0.05).
     - Метод **`apply_interest(self)`**: начисляет проценты на остаток по счету.
 """
-
-
 class SavingsAccount(BankAccount):
     def __init__(self, owner, balance=0,interest_rate=0.05):
         super().__init__(owner, balance)
@@ -61,14 +55,7 @@ class SavingsAccount(BankAccount):
 class CheckingAccount(BankAccount):
     def __init__(self, owner, balance=0):
         super().__init__(owner, balance)
-
     def withdraw(self, amount):
         self._BankAccount__balance -= amount
         return self.get_balance()
 
-if __name__ == "__main__":
-    account = SavingsAccount("Джордж")
-    account.deposit(500)
-    account.withdraw(100)
-    account.apply_interest()
-    print(account.get_balance())
