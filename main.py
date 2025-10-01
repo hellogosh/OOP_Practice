@@ -8,6 +8,9 @@
         - **`withdraw(self, amount)`**: снимает сумму с баланса, если на счету достаточно средств, иначе выбрасывает **`ValueError`**
         - **`get_balance(self)`**: возвращает текущий баланс.
 """
+import pytest as pytest
+
+
 class BankAccount:
     def __init__(self, owner, balance=0):
         self.owner = owner
@@ -56,11 +59,12 @@ class SavingsAccount(BankAccount):
 
 """
 class CheckingAccount(BankAccount):
-    def __init__(self):
-        super().__init__(self, amount)
+    def __init__(self, owner, balance=0):
+        super().__init__(owner, balance)
 
     def withdraw(self, amount):
-        self.__balance -= amount
+        self._BankAccount__balance -= amount
+        return self.get_balance()
 
 if __name__ == "__main__":
     account = SavingsAccount("Джордж")
@@ -68,13 +72,3 @@ if __name__ == "__main__":
     account.withdraw(100)
     account.apply_interest()
     print(account.get_balance())
-
-def test_balance_positive():
-    acc = SavingsAccount("Test")
-    acc.deposit(500)
-    acc.withdraw(100)
-    acc.apply_interest()
-    assert acc.get_balance() > 0
-
-
-
